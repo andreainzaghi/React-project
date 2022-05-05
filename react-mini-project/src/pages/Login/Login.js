@@ -6,26 +6,11 @@ import { useNavigate } from "react-router-dom";
 import usersList from "./mockdata/userlist";
 export const Login = () => {
     const navigate = useNavigate();
-    // const usersList = [
-    //     {
-    //         mail: "taher@sysdata.it",
-    //         password: "password",
-    //         id: "01Axsert",
-    //     },
-    //     {
-    //         mail: "andrea@sysdata.it",
-    //         password: "password",
-    //         id: "4Ecfg35",
-    //     },
-    //     {
-    //         mail: "alberto@sysdata.it",
-    //         password: "password",
-    //         id: "Ait75!ssD",
-    //     },
-    // ];
+
 
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     const handleName = (event) => {
@@ -36,23 +21,40 @@ export const Login = () => {
         setPassword(event.target.value);
     }
 
-    function Login(event) {
-
+    function Login(e) {
+        e.preventDefault()
         usersList.forEach((user) => {
-
-            if (user.mail.match(name) && user.password.match(password)) {
-                console.log('entrato')
-                navigate("/dashboard");
+            console.log(user)
+            if (validateUsername(name) === null) {
+                setErrorMessage('Username is invalid!');
+            } else if (password === "") {
+                setErrorMessage('Password is invalid!');
+            } else {
+                validateCredential(user)
             }
-
         });
+    }
 
+    function validateCredential(user) {
+        if (user.mail.match(name) && user.password.match(password)) {
+            console.log('entrato')
+            navigate("/dashboard");
+        }
+    }
+
+    function validateUsername(username) {
+        //check username with Regex
+        return String(username)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
     }
 
     return (
+
         <BackgroundLogin>
-            <form className="flex justify-center align-center  h-screen place-items-center w-full" id="sforndoform"
-            >
+            <form className="flex justify-center align-center  h-screen place-items-center w-full" id="sforndoform" >
 
                 <div className="grid w-full place-items-center">
                     <div id="box-username" className="flex w-2/5 mb-4 border-2 border-solid rounded-full border-sky-500">
@@ -68,11 +70,11 @@ export const Login = () => {
                     </div>
 
                     <div className="flex w-2/5 bg-[#9ed0ffeb] text-white rounded-full border-solid border-2 border-sky-500">
-                        <button className="w-full h-16 rounded-full" type="submit" onClick={Login}>Sign in</button>
+                        <button className="w-full h-16 rounded-full" onClick={Login}>Sign in</button>
                     </div>
 
-                    <div id="error" className="h-1/5">
-
+                    <div>
+                        <p className="error"> {errorMessage} </p>
                     </div>
                 </div>
             </form>
