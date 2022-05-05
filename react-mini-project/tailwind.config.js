@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'login-pattern': "url('../img/bk-login.png')"
+      }
+    },
   },
   plugins: [],
 }
