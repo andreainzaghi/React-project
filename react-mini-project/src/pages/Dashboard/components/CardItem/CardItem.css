@@ -1,5 +1,5 @@
 .card {
-  @apply px-2.5 w-80 h-60 relative rounded-[20px];
+  @apply p-5 h-60 flex rounded-[20px];
 }
 
 .fire {
