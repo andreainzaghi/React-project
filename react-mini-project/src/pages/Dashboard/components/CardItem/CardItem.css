@@ -1,0 +1,24 @@
+.card {
+  @apply px-2.5 w-80 h-60 relative rounded-[20px];
+}
+
+.fire {
+  @apply bg-[#f16968];
+}
+
+.grass {
+  @apply bg-[#46c8a9];
+}
+
+.bug {
+  @apply bg-[#668d3a];
+}
+
+.water {
+  @apply bg-[#6eb7f5];
+}
+
+.normal,
+.flying {
+  @apply bg-[#a4acaf];
+}

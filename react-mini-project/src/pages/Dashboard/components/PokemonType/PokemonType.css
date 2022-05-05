@@ -1,0 +1,7 @@
+.col {
+  @apply flex-col;
+}
+
+.row {
+  @apply flex-row;
+}
