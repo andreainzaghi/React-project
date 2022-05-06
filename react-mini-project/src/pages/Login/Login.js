@@ -18,6 +18,8 @@ export const Login = () => {
       type: "email",
       placeholder: "Enter your username",
       id: "username",
+      required: true,
+      pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
     },
   };
 
@@ -29,6 +31,7 @@ export const Login = () => {
       type: "password",
       placeholder: "Enter your password",
       id: "password",
+      required: true,
     },
   };
 
@@ -38,34 +41,29 @@ export const Login = () => {
 
   function login(e) {
     e.preventDefault();
-    usersList.forEach((user) => {
-      if (validateUsername(inputLogin.username) === null) {
-        setErrorMessage("Username is invalid!");
-      } else if (inputLogin.password === "") {
-        setErrorMessage("Password is invalid!");
-      } else {
-        validateCredential(user);
-      }
-    });
-  }
 
-  function validateCredential(user) {
-    if (
-      user.mail.match(inputLogin.username) &&
-      user.password.match(inputLogin.password)
-    ) {
+    if (checkUsernameAndPassword()) {
       navigate("/dashboard");
+    } else {
+      setErrorMessage(
+        "username and / or password are incorrect or not filled in"
+      );
     }
   }
 
-  function validateUsername(username) {
-    //check username with Regex
-    return String(username)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  }
+  const checkUsernameAndPassword = () => {
+    if (
+      usersList.find(
+        (user) =>
+          user.mail.match(inputLogin.username) &&
+          user.password.match(inputLogin.password)
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <BackgroundLogin>
@@ -91,8 +89,8 @@ export const Login = () => {
             </button>
           </div>
 
-          <div>
-            <p className="error"> {errorMessage} </p>
+          <div className="h-5">
+            <p className="text-xl font-semibold text-red-600">{errorMessage}</p>
           </div>
         </div>
       </form>
