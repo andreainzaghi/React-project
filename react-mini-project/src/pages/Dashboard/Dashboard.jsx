@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllPokemon } from "../../config";
 import { CardList, Loader } from "./components";
 import { CustomInput } from "../../components";
-import { useDebounce } from "../../hooks/useDebounce";
+import { useDebounce } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
