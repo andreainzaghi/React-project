@@ -12,7 +12,7 @@ export const Login = () => {
 
   const usernameLogin = {
     className: "box-login",
-    inputValue: {
+    inputField: {
       className: "input-login",
       value: inputLogin.name,
       type: "email",
@@ -25,7 +25,7 @@ export const Login = () => {
 
   const passwordInput = {
     className: "box-login",
-    inputValue: {
+    inputField: {
       className: "input-login",
       value: inputLogin.password,
       type: "password",
@@ -39,24 +39,26 @@ export const Login = () => {
     setInputLogin({ ...inputLogin, [target]: value });
   };
 
-  function login(e) {
-    e.preventDefault();
+  const login = (event) => {
+    event.preventDefault();
 
     if (checkUsernameAndPassword()) {
+      setErrorMessage("");
       navigate("/dashboard");
     } else {
-      setErrorMessage(
-        "username and / or password are incorrect or not filled in"
-      );
+      setErrorMessage("Username and/or Password are incorrect");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
     }
-  }
+  };
 
   const checkUsernameAndPassword = () => {
     if (
       usersList.find(
         (user) =>
-          user.mail.match(inputLogin.username) &&
-          user.password.match(inputLogin.password)
+          user.mail === inputLogin.username &&
+          user.password === inputLogin.password
       )
     ) {
       return true;
@@ -67,10 +69,20 @@ export const Login = () => {
 
   return (
     <BackgroundLogin>
+      {errorMessage === "" ? null : (
+        <div role="alert" className="absolute right-3 top-5">
+          <div className="px-4 py-2 font-bold text-white bg-red-500 rounded-t animate-pulse">
+            Danger
+          </div>
+          <div className="px-4 py-3 text-red-700 bg-red-100 border border-t-0 border-red-400 rounded-b">
+            <p>{errorMessage}</p>
+          </div>
+        </div>
+      )}
+
       <form
         onSubmit={login}
         className="flex justify-center w-full h-screen align-center place-items-center"
-        id="sforndoform"
       >
         <div className="grid w-full place-items-center">
           <CustomInput
@@ -87,10 +99,6 @@ export const Login = () => {
             <button className="w-full h-16 rounded-full" type="submit">
               Sign in
             </button>
-          </div>
-
-          <div className="h-5">
-            <p className="text-xl font-semibold text-red-600">{errorMessage}</p>
           </div>
         </div>
       </form>

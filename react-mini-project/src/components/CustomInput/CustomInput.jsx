@@ -7,7 +7,7 @@ export const CustomInput = ({ customInput, onHandleInput }) => {
 
   return (
     <div className={customInput.className}>
-      <input {...customInput.inputValue} onChange={handleInputLogin} />
+      <input {...customInput.inputField} onChange={handleInputLogin} />
     </div>
   );
 };

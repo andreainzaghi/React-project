@@ -11,7 +11,7 @@ export const Dashboard = () => {
 
   const searchInput = {
     className: "box-search",
-    inputValue: {
+    inputField: {
       className: "input-search",
       value: userInput,
       type: "text",
