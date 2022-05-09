@@ -15,7 +15,7 @@ export const CardList = ({ pokemonList }) => {
     return details;
   };
 
-  const getDetailsPokemon = async (pokemonItemList) => {
+  const getDetailsPokemon = async (listItemPokemon) => {
     const array = pokemonList.map(async (item) => {
       const response = await getDetails(item.url);
       return {
@@ -28,8 +28,8 @@ export const CardList = ({ pokemonList }) => {
       };
     });
 
-    pokemonItemList = await Promise.all(array);
-    setCardList(pokemonItemList);
+    listItemPokemon = await Promise.all(array);
+    setCardList(listItemPokemon);
   };
 
   useEffect(() => {
