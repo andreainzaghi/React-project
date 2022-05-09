@@ -1,15 +1,15 @@
 .box-login {
-  @apply flex w-2/5 mb-4 border-2 border-solid rounded-full border-sky-500;
+  @apply flex w-2/5 mb-4 border-2 border-solid rounded-full border-sky-500 relative;
 }
 
 .input-login {
-  @apply w-full h-16 pl-10 rounded-full outline-none;
+  @apply w-full pl-10 h-16 rounded-full outline-none;
 }
 
 .box-search {
-  @apply p-5 text-center;
+  @apply p-5 text-center relative;
 }
 
 .input-search {
-  @apply border-blue-200 rounded-full border-2 p-2 w-4/6 focus:outline-none;
+  @apply border-blue-200 rounded-full border-2 p-2 pl-10 w-4/6 focus:outline-none;
 }
