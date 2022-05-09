@@ -3,12 +3,21 @@ import { getAllPokemon } from "../../config";
 import { CardList, Loader } from "./components";
 import { CustomInput } from "../../components";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
+
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [userInput, setUserInput] = useState("");
+
   const debouncedValue = useDebounce(userInput, 1500);
+
   const [loader, showLoader] = useState(true);
+
+  const isLogged = Boolean(window.sessionStorage.getItem("isLogged"))
+    ? Boolean(window.sessionStorage.getItem("isLogged"))
+    : false;
 
   const searchInput = {
     className: "box-search",
@@ -37,6 +46,9 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!isLogged) {
+      navigate("/");
+    }
     getFilteredPokemon();
   }, [debouncedValue]);
 

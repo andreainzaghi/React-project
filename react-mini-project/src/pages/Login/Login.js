@@ -44,6 +44,7 @@ export const Login = () => {
 
     if (checkUsernameAndPassword()) {
       setErrorMessage("");
+      window.sessionStorage.setItem("isLogged", true);
       navigate("/dashboard");
     } else {
       setErrorMessage("Username and/or Password are incorrect");
@@ -66,6 +67,10 @@ export const Login = () => {
       return false;
     }
   };
+
+  if (window.sessionStorage.getItem("isLogged")) {
+    window.sessionStorage.clear();
+  }
 
   return (
     <BackgroundLogin>
