@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllPokemon } from "../../config";
 import { CardList } from "./components";
-
+import { CardDetails } from "./components/CardDetails/CardDetails";
 export const Dashboard = () => {
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [userInput, setUserInput] = useState("");
@@ -27,10 +27,12 @@ export const Dashboard = () => {
   return (
     <section>
       <div className="flex w-full h-4/5">
-        <div className="grid w-6/12 grid-flow-row grid-cols-2 gap-4 p-5 overflow-x-hidden">
+        <div className="grid w-6/12 grid-flow-row grid-cols-2 gap-4 p-5 overflow-x-hidden overflow-auto h-screen">
           <CardList pokemonList={filteredPokemon} />
         </div>
-        <div></div>
+        <div className="  w-6/12 h-screen">
+          <CardDetails />
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CardItem } from "../CardItem";
-
+import { DragDropContext } from 'react-beautiful-dnd';
 export const CardList = ({ pokemonList }) => {
   const [cardList, setCardList] = useState([]);
 
@@ -42,6 +42,7 @@ export const CardList = ({ pokemonList }) => {
     <>
       {cardList.length > 0 ? (
         cardList.map((pokemon) => {
+
           return <CardItem key={pokemon.id} pokemon={pokemon} />;
         })
       ) : (
