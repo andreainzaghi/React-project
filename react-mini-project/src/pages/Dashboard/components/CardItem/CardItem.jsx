@@ -15,9 +15,16 @@ export const CardItem = ({ pokemon }) => {
 
   function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
-    dispatch(pokemonAction.getPokemon(ev.target.id, ev.target.name, ev.target.img))
+    dispatch(pokemonAction.getPokemon(ev.target.id))
 
   }
+
+  // function deleteelement(ev) {
+  //   let cardelement = document.querySelector(ev.target.id)
+  //   console.log(cardelement)
+  //   // console.log(cardelement)
+  //   // cardelement.remove()
+  // }
 
   function drop(ev) {
     ev.preventDefault();
@@ -33,6 +40,7 @@ export const CardItem = ({ pokemon }) => {
 
   return (
     <section id="div1" onDrop={drop} onDragOver={allowDrop}>
+
       <div draggable="true" className={`card ${classes} items-start justify-between border-2`} onDragStart={drag} id={pokemon.id}>
 
         <div className="block ">
@@ -41,7 +49,7 @@ export const CardItem = ({ pokemon }) => {
               <p>{pokemon.name}</p>
             </div>
           </div>
-
+          {/* <div onClick={deleteelement}>x</div> */}
           <div>
             {pokemon.types.map((type, idx) => (
               <PokemonType type={type.type.name} direction="col" key={idx} />
@@ -52,6 +60,7 @@ export const CardItem = ({ pokemon }) => {
           <div className=" text-4xl opacity-25 text-center">
             <span>{generateId(pokemon.id)}</span>
           </div>
+
           <img
             src={pokemon.img}
             className=" w-40 h-40 bg-no-repeat bg-cover   "

@@ -15,9 +15,9 @@ const pokemonSlice = createSlice({
     initialState: initialState,
     reducers: {
         getPokemon(state, action) {
+            // console.log(action)
             state.pokemon.id = action.payload;
-            state.pokemon.name = action.payload;
-            state.pokemon.img = action.payload;
+
         }
     }
 });
